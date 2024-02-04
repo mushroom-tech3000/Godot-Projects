@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://djmvboo4w7xeh"]
+
+[ext_resource type="Script" path="res://classes/sides.gd" id="1_ooosi"]
+
+[node name="Sides" type="Node"]
+script = ExtResource("1_ooosi")

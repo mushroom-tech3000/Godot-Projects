@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://dyw2n2pvss8ch"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_pas3q"]
+[ext_resource type="Script" path="res://addons/orbit-controls/orbit-controls.gd" id="2_haxpg"]
+[ext_resource type="Script" path="res://Mouse.gd" id="3_bblc7"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v32rw"]
+sky_top_color = Color(0.211765, 0.615686, 0.780392, 1)
+sky_horizon_color = Color(0.415686, 0.780392, 0.913725, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.415686, 0.780392, 0.913725, 1)
+
+[sub_resource type="Sky" id="Sky_5nh1r"]
+sky_material = SubResource("ProceduralSkyMaterial_v32rw")
+process_mode = 1
+
+[sub_resource type="Environment" id="Environment_vi5jo"]
+background_mode = 2
+sky = SubResource("Sky_5nh1r")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_pas3q")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vi5jo")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+light_color = Color(1, 0.913725, 0.729412, 1)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.909983, 0.414646, 0, -0.414646, 0.909983, 0, 0.714007, 3.40541)
+current = true
+far = 50000.0
+
+[node name="OrbitControls" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_haxpg")
+_camera = NodePath("../Camera3D")
+
+[node name="MapBlocks" type="Node3D" parent="."]
+
+[node name="Mouse" type="Node" parent="."]
+script = ExtResource("3_bblc7")

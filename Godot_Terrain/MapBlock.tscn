@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://dnxwep8whc5dd"]
+
+[ext_resource type="Script" path="res://MapBlock.gd" id="1_sxvmc"]
+[ext_resource type="ArrayMesh" uid="uid://dokh2c6hmel68" path="res://tests/blenderImport/grass.res" id="2_jesnw"]
+[ext_resource type="Script" path="res://Grass.gd" id="3_cgmwa"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_cvdrv"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_m8qpd"]
+
+[sub_resource type="MultiMesh" id="MultiMesh_lm6kf"]
+transform_format = 1
+mesh = ExtResource("2_jesnw")
+
+[node name="MapBlock" type="Node3D"]
+script = ExtResource("1_sxvmc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_cvdrv")
+
+[node name="MeshInstance3DWater" type="MeshInstance3D" parent="."]
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3DWater"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3DWater/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_m8qpd")
+
+[node name="MeshInstance3DSides" type="MeshInstance3D" parent="."]
+skeleton = NodePath("")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+visible = false
+pixel_size = 0.1
+
+[node name="DebugEdgeMarker" type="CSGBox3D" parent="."]
+visible = false
+size = Vector3(1, 8, 1)
+
+[node name="DebugTileSizeMarkerBase" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -10.51, 0)
+
+[node name="Grass" type="MultiMeshInstance3D" parent="."]
+multimesh = SubResource("MultiMesh_lm6kf")
+script = ExtResource("3_cgmwa")

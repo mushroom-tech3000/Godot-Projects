@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cx8gieq27g6fu"]
+
+[ext_resource type="PackedScene" uid="uid://bjaaem74n0j8" path="res://tests/blenderImport/cube.blend" id="1_sr5l4"]
+
+[node name="BlenderImport" type="Node3D"]
+
+[node name="cube" parent="." instance=ExtResource("1_sr5l4")]
+
+[editable path="cube"]
