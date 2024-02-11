@@ -8,6 +8,9 @@ var mapBlocksData = {}
 
 var heights: Dictionary = {}
 
+const EXTRA_HEIGHT = 5
+const HEIGHT_VARIATION = 10
+
 func getKey (x, y) -> String:
 	return str(x) + "_" + str(y)	
 	
@@ -21,19 +24,22 @@ func getMapBlockKeyFrom2DWorldPos(pos: Vector2) -> String:
 	#print("geMapBlockKey col:", col, " row:", row)
 	return getKey(col, row)
 
+func getHeight(vertexPos: Vector2):
+	return heights[vertexPos]
+
 func _ready():
 	randomize()
 	noise.set_noise_type(noise.TYPE_PERLIN)
 	noise.set_seed(randf())
-	var count = 1
+	var count = 10
 	for col in range(-count, count):
 		for row in range(-count, count):
 			var blockDataClass = mapBlockDataClass.new()
 			blockDataClass.setup(getKey(col, row), col, row) 
 			mapBlocksData[getKey(col, row)] = blockDataClass
-	
 	for key in mapBlocksData:
 		createRandomMap(mapBlocksData[key])
+	$Roads.addCentreRoad()
 
 func getRequiredSides(b: Variant):
 	var sides = sidesClass.new()
@@ -45,15 +51,15 @@ func getRequiredSides(b: Variant):
 
 func createRandomMap(b: Variant):
 	var heightData: Dictionary = {}
-	var worldX: int = b.col * Global.mapBlockSize
+	var worldX: int = b.col * Global.mapBlockSize 
 	var worldY: int = b.row * Global.mapBlockSize
 	for x in range(0, Global.mapBlockSize + 1):
 		for y in range(0, Global.mapBlockSize + 1):
 			var vertexPos = Vector2(x + worldX, y + worldY)
-			#print(vertexPos)
-			var height = noise.get_noise_2d(vertexPos.x, vertexPos.y) * 20
+			var height = (noise.get_noise_2d(vertexPos.x, vertexPos.y) * HEIGHT_VARIATION) + EXTRA_HEIGHT
 			heightData[Vector2(x,y)] = height
 			heights[vertexPos] = height
+			$Roads.addEmptyRoad(vertexPos)
 	renderMapBlock(b)		
 			
 			

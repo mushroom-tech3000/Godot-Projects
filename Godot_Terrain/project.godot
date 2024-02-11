@@ -22,3 +22,7 @@ Global="*res://globals/global.gd"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/orbit-controls/plugin.cfg")
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"

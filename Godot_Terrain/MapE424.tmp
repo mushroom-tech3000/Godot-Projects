@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dnxwep8whc5dd"]
 
 [ext_resource type="Script" path="res://MapBlock.gd" id="1_sxvmc"]
-[ext_resource type="ArrayMesh" uid="uid://dutcwi3lnojw7" path="res://models/grass.res" id="2_68cam"]
+[ext_resource type="ArrayMesh" uid="uid://dokh2c6hmel68" path="res://models/grass.res" id="2_68cam"]
 [ext_resource type="Script" path="res://Grass.gd" id="3_cgmwa"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_cvdrv"]

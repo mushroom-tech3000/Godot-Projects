@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dyw2n2pvss8ch"]
+[gd_scene load_steps=10 format=3 uid="uid://dyw2n2pvss8ch"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_pas3q"]
 [ext_resource type="Script" path="res://addons/orbit-controls/orbit-controls.gd" id="2_haxpg"]
 [ext_resource type="Script" path="res://Mouse.gd" id="3_bblc7"]
 [ext_resource type="Script" path="res://DebugControls.gd" id="4_62mrp"]
 [ext_resource type="Script" path="res://TerraformController.gd" id="4_g7lo2"]
+[ext_resource type="Script" path="res://Roads.gd" id="6_b7i5a"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v32rw"]
 sky_top_color = Color(0.211765, 0.615686, 0.780392, 1)
@@ -34,9 +35,9 @@ light_color = Color(1, 0.913725, 0.729412, 1)
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.909983, 0.414646, 0, -0.414646, 0.909983, 0, 0.714007, 3.40541)
+transform = Transform3D(1, 0, 0, 0, 0.909983, 0.414646, 0, -0.414646, 0.909983, 0, 55.514, 3.405)
 current = true
-far = 50000.0
+far = 500000.0
 
 [node name="OrbitControls" type="Control" parent="."]
 layout_mode = 3
@@ -106,7 +107,17 @@ layout_mode = 2
 min_value = 1.0
 value = 5.0
 
+[node name="Roads" type="Node3D" parent="."]
+script = ExtResource("6_b7i5a")
+
+[node name="RoadInstances" type="Node3D" parent="Roads"]
+
+[node name="Timer" type="Timer" parent="Roads"]
+wait_time = 0.1
+autostart = true
+
 [connection signal="toggled" from="DebugControls/DebugControls/CornerMarkers" to="DebugControls/DebugControls" method="_on_corner_markers_toggled"]
 [connection signal="toggled" from="DebugControls/DebugControls/BlockLabels" to="DebugControls/DebugControls" method="_on_block_labels_toggled"]
 [connection signal="item_selected" from="DebugControls/DebugControls/TerraformTypeSelector" to="DebugControls/DebugControls" method="_on_terraform_type_selector_item_selected"]
 [connection signal="drag_ended" from="DebugControls/DebugControls/TerraformBrushSizeSelector" to="DebugControls/DebugControls" method="_on_terraform_brush_size_selector_drag_ended"]
+[connection signal="timeout" from="Roads/Timer" to="Roads" method="_on_timer_timeout"]

@@ -17,6 +17,7 @@ var lowestWater: int = Global.lowestWater
 var col: int
 var row: int
 
+
 func setup(pHeightData: Variant, pWidthHeight: int, pSides: Variant, pCol: int, pRow: int)	:
 	heightData = pHeightData
 	widthHeight = pWidthHeight
@@ -90,11 +91,11 @@ func makeMapMesh():
 			createTriangle(v1, v2, v4)
 			createTriangle(v2, v3, v4)	
 			#var middle = (v1 + v2 + v3 + v4) / 4.0
-			if v1.y > waterHeight: $Grass.add(v1 + Vector3(randf_range(-0.5, 0.5), 0, randf_range(-0.5, 0.5)))
-			if v2.y > waterHeight: $Grass.add(v2 + Vector3(randf_range(-0.5, 0.5), 0, randf_range(-0.5, 0.5)))
-			if v3.y > waterHeight: $Grass.add(v3 + Vector3(randf_range(-0.5, 0.5), 0, randf_range(-0.5, 0.5)))
-			if v4.y > waterHeight: $Grass.add(v4 + Vector3(randf_range(-0.5, 0.5), 0, randf_range(-0.5, 0.5)))
-			
+			if v1.y > waterHeight: $Grass.add(v1 + Vector3(randf_range(-0.3, 0.3), -0.03, randf_range(-0.3, 0.3)))
+			if v2.y > waterHeight: $Grass.add(v2 + Vector3(randf_range(-0.3, 0.3), -0.03, randf_range(-0.3, 0.3)))
+			if v3.y > waterHeight: $Grass.add(v3 + Vector3(randf_range(-0.3, 0.3), -0.03, randf_range(-0.3, 0.3)))
+			if v4.y > waterHeight: $Grass.add(v4 + Vector3(randf_range(-0.3, 0.3), -0.03, randf_range(-0.3, 0.3)))
+		
 			
 	var tmpMesh = makeMesh(grassMaterial)
 	$MeshInstance3D.mesh = tmpMesh
@@ -163,9 +164,9 @@ func createTriangle(vert1, vert2, vert3):
 	vertices.push_back(vert1)
 	vertices.push_back(vert2)
 	vertices.push_back(vert3)
-	UVs.push_back(Vector2(vert1.x/.1, -vert1.z/.1))
-	UVs.push_back(Vector2(vert2.x/.1, -vert2.z/.1))
-	UVs.push_back(Vector2(vert3.x/.1, -vert3.z/.1))
+	UVs.push_back(Vector2(vert1.x/.5, -vert1.z/.5))
+	UVs.push_back(Vector2(vert2.x/.5, -vert2.z/.5))
+	UVs.push_back(Vector2(vert3.x/.5, -vert3.z/.5))
 	var side1 = vert1-vert2
 	var side2 = vert3-vert1
 	var normal = side1.cross(side2).normalized()

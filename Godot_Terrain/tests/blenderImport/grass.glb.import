@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://tji8rk4pcmac"
+uid="uid://b1d7r5mpwiflv"
 path="res://.godot/imported/grass.glb-661dc1e92cdfb5fce6cc0ea9929f4b2e.scn"
 
 [deps]
@@ -39,7 +39,7 @@ _subresources={
 "lods/normal_split_angle": 25.0,
 "save_to_file/enabled": true,
 "save_to_file/make_streamable": "",
-"save_to_file/path": "res://tests/blenderGrass/grass.res"
+"save_to_file/path": "res://models/grass.res"
 }
 }
 }
